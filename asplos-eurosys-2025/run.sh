@@ -142,7 +142,7 @@ fix_schedule_page() {
     sed -i "s/$prefix\/speaker/$other_prefix\/schedule/g" $2
     sed -i "s/Speakers/$other<\/a><a href=\"\/media\/postillion-floorplan.pdf\" class=\"btn btn-outline-success\">Map/g" $2
 
-    # Fix horizontal scroll on mobile and Catering area sessions
+    # Fix horizontal scroll on mobile and no-room sessions
     sed -i 's|</head>|<link rel="stylesheet" type="text/css" href="/static/extras.css" /><script src="/static/extras.js"></script></head>|' $2
 
 }

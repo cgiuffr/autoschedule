@@ -3,19 +3,15 @@ function patchShadowRooms(shadowRoot) {
   sessions.forEach((session) => {
     const trackDiv = session.querySelector(".track");
     const roomDiv = session.querySelector(".room");
-    if (trackDiv && trackDiv.textContent.trim() === "Catering area") {
+    const trackText = trackDiv ? trackDiv.textContent.trim() : null;
+    if (trackText && !trackText.includes("EuroSys") && !trackText.includes("ASPLOS")) {
         if (roomDiv) {
             // Copy track text to room
             roomDiv.textContent = trackDiv.textContent;
             // Clear the track
             trackDiv.textContent = "";
         }
-
-        // Set href="" on the nearest <a> ancestor
-        const anchor = trackDiv.closest("a");
-        if (anchor) {
-          anchor.removeAttribute("href");
-        }
+        session.removeAttribute("href");
     }
   });
 }
