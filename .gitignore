@@ -169,3 +169,8 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# Add-ons
+params.py
+asplos-eurosys-2025/params*.py
+asplos-eurosys-2025/input.csv
