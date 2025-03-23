@@ -349,9 +349,9 @@ def main():
             pass
         try:
             call_command("export_schedule_html", p.EVENT_SLUG)
-            print("✅ HTML export completed successfully.")
+            print("HTML export completed successfully.")
         except Exception as e:
-            print(f"❌ Error triggering HTML export: {e}")
+            print(f"Error triggering HTML export: {e}")
 
 
 if __name__ == "__main__":
