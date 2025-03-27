@@ -8,6 +8,8 @@ import sys
 os.chdir(os.path.dirname(os.path.abspath(sys.argv[0])))
 
 # --- Deduplicate column names helper ---
+
+
 def dedup_column_names(names):
     seen = {}
     result = []
@@ -21,6 +23,8 @@ def dedup_column_names(names):
     return result
 
 # --- Block-aware column filtering helper ---
+
+
 def get_column_blocks(date_row, header_row, target_date):
     col_blocks = []
     current_block = []
@@ -49,10 +53,14 @@ def get_column_blocks(date_row, header_row, target_date):
     return sorted(set(columns_to_keep))
 
 # --- Normalize time slot formatting ---
+
+
 def normalize_time_slot(text):
     return re.sub(r"(\d{2}:\d{2})\s*-\s*(\d{2}:\d{2})", r"\1 - \2", text.replace("-", " - "))
 
 # --- Clean session names ---
+
+
 def clean_session(session):
     try:
         if isinstance(session, str):
@@ -68,6 +76,8 @@ def clean_session(session):
         return str(session)
 
 # --- Room-as-rows layout ---
+
+
 def generate_schedule_plot(header_height, cell_height, font_size, date_str, input_path, output_pdf_path):
     df_raw = pd.read_csv(input_path, sep=',', header=None)
     date_row = df_raw.iloc[0]
@@ -79,7 +89,8 @@ def generate_schedule_plot(header_height, cell_height, font_size, date_str, inpu
         return
 
     df = df_raw.iloc[2:, columns_to_keep_idx]
-    filtered_headers = df_raw.iloc[1, columns_to_keep_idx].astype(str).str.strip().tolist()
+    filtered_headers = df_raw.iloc[1, columns_to_keep_idx].astype(
+        str).str.strip().tolist()
     df.columns = dedup_column_names(filtered_headers)
 
     time_cols = [col for col in df.columns if col.lower().startswith("time")]
@@ -91,7 +102,8 @@ def generate_schedule_plot(header_height, cell_height, font_size, date_str, inpu
 
     # ✅ Include only rows with [ASPLOS...] or [EuroSys...]
     df = df[df[room_cols].apply(
-        lambda row: row.astype(str).str.contains(r"\[.*?(?:ASPLOS|EuroSys)", case=False).any(),
+        lambda row: row.astype(str).str.contains(
+            r"\[.*?(?:ASPLOS|EuroSys)", case=False).any(),
         axis=1
     )]
 
@@ -150,6 +162,8 @@ def generate_schedule_plot(header_height, cell_height, font_size, date_str, inpu
     print(f"✅ PDF saved for {date_str}: {output_pdf_path}")
 
 # --- Time-as-rows layout ---
+
+
 def generate_schedule_plot2(header_height, cell_height, font_size, date_str, input_path, output_pdf_path):
     df_raw = pd.read_csv(input_path, sep=',', header=None)
     date_row = df_raw.iloc[0]
@@ -161,7 +175,8 @@ def generate_schedule_plot2(header_height, cell_height, font_size, date_str, inp
         return
 
     df = df_raw.iloc[2:, columns_to_keep_idx]
-    filtered_headers = df_raw.iloc[1, columns_to_keep_idx].astype(str).str.strip().tolist()
+    filtered_headers = df_raw.iloc[1, columns_to_keep_idx].astype(
+        str).str.strip().tolist()
     df.columns = dedup_column_names(filtered_headers)
 
     time_cols = [col for col in df.columns if col.lower().startswith("time")]
@@ -173,7 +188,8 @@ def generate_schedule_plot2(header_height, cell_height, font_size, date_str, inp
 
     # ✅ Include only rows with [ASPLOS...] or [EuroSys...]
     df = df[df[room_cols].apply(
-        lambda row: row.astype(str).str.contains(r"\[.*?(?:ASPLOS|EuroSys)", case=False).any(),
+        lambda row: row.astype(str).str.contains(
+            r"\[.*?(?:ASPLOS|EuroSys)", case=False).any(),
         axis=1
     )]
 
@@ -183,6 +199,7 @@ def generate_schedule_plot2(header_height, cell_height, font_size, date_str, inp
     df = df[[time_col] + room_cols]
     df = df.rename(columns={time_col: "Time"})
     df["Time"] = df["Time"].astype(str).apply(normalize_time_slot)
+    df["Time"] = df["Time"].apply(lambda x: f"<b>{x}</b>")
 
     base_colors = ['#C8D4E3', '#ffffff']
     if len(df) % 2 == 0:
@@ -210,9 +227,10 @@ def generate_schedule_plot2(header_height, cell_height, font_size, date_str, inp
     pio.write_image(fig, output_pdf_path, format="pdf")
     print(f"✅ PDF saved for {date_str}: {output_pdf_path}")
 
+
 input = "input.ref.csv"
 
-date="2025-03-30"
+date = "2025-03-30"
 generate_schedule_plot(
     header_height=72,
     cell_height=54,
@@ -222,7 +240,7 @@ generate_schedule_plot(
     output_pdf_path=f"{date}-schedule.pdf"
 )
 
-date="2025-03-31"
+date = "2025-03-31"
 generate_schedule_plot(
     header_height=70,
     cell_height=50,
@@ -232,7 +250,7 @@ generate_schedule_plot(
     output_pdf_path=f"{date}-schedule.pdf"
 )
 
-date="2025-04-01"
+date = "2025-04-01"
 generate_schedule_plot2(
     header_height=104,
     cell_height=77,
@@ -242,7 +260,7 @@ generate_schedule_plot2(
     output_pdf_path=f"{date}-schedule.pdf"
 )
 
-date="2025-04-02"
+date = "2025-04-02"
 generate_schedule_plot2(
     header_height=104,
     cell_height=154,
@@ -252,7 +270,7 @@ generate_schedule_plot2(
     output_pdf_path=f"{date}-schedule.pdf"
 )
 
-date="2025-04-03"
+date = "2025-04-03"
 generate_schedule_plot2(
     header_height=104,
     cell_height=154,
