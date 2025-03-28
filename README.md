@@ -26,7 +26,8 @@ cp params_default.py params.py # And edit
 # Reproducing the ASPLOS/EuroSys 2025 Schedule
 ```
 cd asplos-eurosys-2025
-./run.sh
+./run.sh # for the online digital schedule
+./display-schedule.py # for the schedule as displayed on the conference screens
 ```
 
 ## 🐝 License

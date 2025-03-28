@@ -100,7 +100,7 @@ def generate_schedule_plot(header_height, cell_height, font_size, date_str, inpu
         return
     time_col = time_cols[0]
 
-    # ✅ Include only rows with [ASPLOS...] or [EuroSys...]
+    # Include only rows with [ASPLOS...] or [EuroSys...]
     df = df[df[room_cols].apply(
         lambda row: row.astype(str).str.contains(
             r"\[.*?(?:ASPLOS|EuroSys)", case=False).any(),
@@ -159,7 +159,7 @@ def generate_schedule_plot(header_height, cell_height, font_size, date_str, inpu
 
     fig.update_layout(width=1280, height=720, margin=dict(l=0, r=0, t=0, b=0))
     pio.write_image(fig, output_pdf_path, format="pdf")
-    print(f"✅ PDF saved for {date_str}: {output_pdf_path}")
+    print(f"PDF saved for {date_str}: {output_pdf_path}")
 
 # --- Time-as-rows layout ---
 
@@ -186,7 +186,7 @@ def generate_schedule_plot2(header_height, cell_height, font_size, date_str, inp
         return
     time_col = time_cols[0]
 
-    # ✅ Include only rows with [ASPLOS...] or [EuroSys...]
+    # Include only rows with [ASPLOS...] or [EuroSys...]
     df = df[df[room_cols].apply(
         lambda row: row.astype(str).str.contains(
             r"\[.*?(?:ASPLOS|EuroSys)", case=False).any(),
@@ -225,7 +225,7 @@ def generate_schedule_plot2(header_height, cell_height, font_size, date_str, inp
 
     fig.update_layout(width=1280, height=720, margin=dict(l=0, r=0, t=0, b=0))
     pio.write_image(fig, output_pdf_path, format="pdf")
-    print(f"✅ PDF saved for {date_str}: {output_pdf_path}")
+    print(f"PDF saved for {date_str}: {output_pdf_path}")
 
 
 input = "input.ref.csv"
@@ -237,7 +237,7 @@ generate_schedule_plot(
     font_size=18,
     date_str=date,
     input_path=input,
-    output_pdf_path=f"{date}-schedule.pdf"
+    output_pdf_path=f"output/{date}-schedule.pdf"
 )
 
 date = "2025-03-31"
@@ -247,7 +247,7 @@ generate_schedule_plot(
     font_size=18,
     date_str=date,
     input_path=input,
-    output_pdf_path=f"{date}-schedule.pdf"
+    output_pdf_path=f"output/{date}-schedule.pdf"
 )
 
 date = "2025-04-01"
@@ -257,7 +257,7 @@ generate_schedule_plot2(
     font_size=18,
     date_str=date,
     input_path=input,
-    output_pdf_path=f"{date}-schedule.pdf"
+    output_pdf_path=f"output/{date}-schedule.pdf"
 )
 
 date = "2025-04-02"
@@ -267,7 +267,7 @@ generate_schedule_plot2(
     font_size=18,
     date_str=date,
     input_path=input,
-    output_pdf_path=f"{date}-schedule.pdf"
+    output_pdf_path=f"output/{date}-schedule.pdf"
 )
 
 date = "2025-04-03"
@@ -277,5 +277,5 @@ generate_schedule_plot2(
     font_size=18,
     date_str=date,
     input_path=input,
-    output_pdf_path=f"{date}-schedule.pdf"
+    output_pdf_path=f"output/{date}-schedule.pdf"
 )
