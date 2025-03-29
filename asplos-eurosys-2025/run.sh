@@ -42,7 +42,7 @@ EVENT_END_DATE = EVENT_DATE + timedelta(days=1)
 EVENT_PRIMARY_COLOR = "$EVENT_PRIMARY_COLOR"
 TRACKS = [
     {"name": "ASPLOS",          "color": "#8B0000"},
-    {"name": "EuroSys",         "color": "#003366"},
+    {"name": "EuroSys",         "color": "#3B5998"},
     {"name": "ASPLOS+EuroSys",  "color": "#6A0DAD"},
     {"name": "ASPLOS Tutorial", "color": "#006B3F"},
     {"name": "Catering area",   "color": "#DAA520"},
