@@ -261,8 +261,8 @@ generate_schedule_plot(
 
 date = "2025-04-01"
 generate_schedule_plot2(
-    header_height=104,
-    cell_height=77,
+    header_height=106,
+    cell_height=74,
     font_size=18,
     date_str=date,
     input_path=input,
